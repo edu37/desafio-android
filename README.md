@@ -29,10 +29,13 @@ Criar um aplicativo para consultar a [API do GitHub](https://developer.github.co
 
 * Retrofit | Volley 
 * Picasso | Universal Image Loader | Glide
-* Espresso | Robotium | Robolectric
+* Espresso | Robotium | Robolectric | Junit
 * RXJava | Coroutines
-* Live data
+* Live Data
 * Conceitos Clean Code
+* Jetpack
+* Utilizar GITFLOW
+* 
 * ref: `https://developer.android.com/topic/libraries/architecture`
 
 
