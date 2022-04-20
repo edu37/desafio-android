@@ -7,12 +7,12 @@ Criar um aplicativo para consultar a [API do GitHub](https://developer.github.co
 ### **Deve conter** ###
 
 - __Lista de repositórios__. Exemplo de chamada na API: `https://api.github.com/search/repositories?q=language:Java&sort=stars&page=1`
-  * Paginação na tela de lista, com Paging library (jetpack) ref: `https://developer.android.com/topic/libraries/architecture/paging`.
-  * Cada repositório deve exibir Nome do repositório, Descrição do Repositório, Nome / Foto do autor, Número de Stars, Número de Forks
-  * Ao tocar em um item, deve levar a lista de Pull Requests do repositório
+    * Paginação na tela de lista, com Paging library (jetpack) ref: `https://developer.android.com/topic/libraries/architecture/paging`.
+    * Cada repositório deve exibir Nome do repositório, Descrição do Repositório, Nome / Foto do autor, Número de Stars, Número de Forks
+    * Ao tocar em um item, deve levar a lista de Pull Requests do repositório
 - __Pull Requests de um repositório__. Exemplo de chamada na API: `https://api.github.com/repos/<criador>/<repositório>/pulls`
-  * Cada item da lista deve exibir Nome / Foto do autor do PR, Título do PR, Data do PR e Body do PR
-  * Ao tocar em um item, deve abrir no browser a página do Pull Request em questão
+    * Cada item da lista deve exibir Nome / Foto do autor do PR, Título do PR, Data do PR e Body do PR
+    * Ao tocar em um item, deve abrir no browser a página do Pull Request em questão
 
 ### **Serão observados** ##
 
@@ -27,7 +27,7 @@ Criar um aplicativo para consultar a [API do GitHub](https://developer.github.co
 
 ### **Sugestões** ###
 
-* Retrofit | Volley 
+* Retrofit | Volley
 * Picasso | Universal Image Loader | Glide
 * Espresso | Robotium | Robolectric | Junit
 * RXJava | Coroutines
@@ -35,13 +35,13 @@ Criar um aplicativo para consultar a [API do GitHub](https://developer.github.co
 * Conceitos Clean Code
 * Jetpack
 * Utilizar GITFLOW
-* 
+*
 * ref: `https://developer.android.com/topic/libraries/architecture`
 
 
 ### **OBS** ###
 
-A foto do mockup é meramente ilustrativa.  
+A foto do mockup é meramente ilustrativa.
 
 
 ### **Processo de submissão** ###
