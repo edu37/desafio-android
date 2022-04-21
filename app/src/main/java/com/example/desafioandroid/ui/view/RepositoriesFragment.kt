@@ -1,5 +1,7 @@
 package com.example.desafioandroid.ui.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -61,16 +63,15 @@ class RepositoriesFragment : Fragment() {
         _binding = null
     }
 
-    private fun collector() = lifecycleScope.launch{
-        repeatOnLifecycle(Lifecycle.State.STARTED){
+    private fun collector() = lifecycleScope.launch {
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
             mViewModel.test.collectLatest { state ->
                 when (state) {
                     is State.Sucess -> {
                         state.data?.let { response ->
-                            if (response.items.count() > 0){
+                            if (response.items.count() > 0) {
                                 mAdapter.repositories = response.items.toList()
-                            }
-                            else {
+                            } else {
                                 mAdapter.repositories = arrayListOf()
                                 Toast.makeText(requireContext(), "Vazio", Toast.LENGTH_SHORT).show()
                             }
@@ -102,6 +103,11 @@ class RepositoriesFragment : Fragment() {
             val repoName = repository.repoName
             mViewModel.saveData(userName, repoName)
             findNavController().navigate(R.id.action_RepositoriesFragment_to_PullRequestsFragment)
+        }
+        mAdapter.setOnUserClickListener { repository ->
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = (Uri.parse(repository.owner.userUrl))
+            startActivity(intent)
         }
     }
 }

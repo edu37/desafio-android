@@ -14,11 +14,14 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_titulo_pull"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:fontFamily="sans-serif-condensed"
+            android:maxLines="1"
             android:padding="8dp"
             android:text="@string/pull_tittle"
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@id/text_body"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,19 +29,24 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_body"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:ellipsize="end"
             android:fontFamily="sans-serif-condensed"
+            android:maxLines="3"
             android:padding="8dp"
             android:text="@string/body"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/image_avatar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/text_titulo_pull" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_avatar"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="130dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/perfil" />
@@ -62,6 +70,7 @@
             android:layout_marginStart="7dp"
             android:layout_marginEnd="16dp"
             android:text="@string/date"
+            android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

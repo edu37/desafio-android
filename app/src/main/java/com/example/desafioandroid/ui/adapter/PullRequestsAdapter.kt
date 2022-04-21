@@ -9,12 +9,14 @@ import com.example.desafioandroid.data.model.PullRequestsModel
 import com.example.desafioandroid.databinding.ItemPullRequestBinding
 import com.example.desafioandroid.util.limitDescription
 import com.example.desafioandroid.util.loadImage
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PullRequestsAdapter : RecyclerView.Adapter<PullRequestsAdapter.PullRequestsViewHolder>() {
 
     inner class PullRequestsViewHolder(val binding: ItemPullRequestBinding) :
         RecyclerView.ViewHolder(binding.root)
-    
+
     private val differCallBack = object : DiffUtil.ItemCallback<PullRequestsModel>() {
         override fun areItemsTheSame(
             oldItem: PullRequestsModel,
@@ -36,8 +38,8 @@ class PullRequestsAdapter : RecyclerView.Adapter<PullRequestsAdapter.PullRequest
     private val differ = AsyncListDiffer(this, differCallBack)
 
     var pullRequests: List<PullRequestsModel>
-    get() = differ.currentList
-    set(value) = differ.submitList(value)
+        get() = differ.currentList
+        set(value) = differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PullRequestsViewHolder {
         return PullRequestsViewHolder(
@@ -56,10 +58,26 @@ class PullRequestsAdapter : RecyclerView.Adapter<PullRequestsAdapter.PullRequest
 
         holder.binding.apply {
             textUserName.text = pullRequest.user.name
-            textBody.text = pullRequest.body?.limitDescription(50)
-            textTituloPull.text = pullRequest.title.limitDescription(30)
-            textDate.text = pullRequest.date
+            textBody.text = pullRequest.body.toString()
+            textTituloPull.text = pullRequest.title
+
+            val dateFormat = pullRequest.date.limitDescription(10)
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(dateFormat)
+            textDate.text = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(date!!)
+
             loadImage(imageAvatar, pullRequest.user.avatar)
+
+
+            textUserName.setOnClickListener {
+                onUserClickListener?.let {
+                    it(pullRequest)
+                }
+            }
+            imageAvatar.setOnClickListener {
+                onUserClickListener?.let {
+                    it(pullRequest)
+                }
+            }
         }
 
         holder.itemView.setOnClickListener {
@@ -69,11 +87,16 @@ class PullRequestsAdapter : RecyclerView.Adapter<PullRequestsAdapter.PullRequest
         }
     }
 
-
     private var onClickListener: ((PullRequestsModel) -> Unit)? = null
+
+    private var onUserClickListener: ((PullRequestsModel) -> Unit)? = null
 
     fun setOnClickListener(listener: (PullRequestsModel) -> Unit) {
         onClickListener = listener
+    }
+
+    fun setOnUserClickListener(listener: (PullRequestsModel) -> Unit) {
+        onUserClickListener = listener
     }
 
 }

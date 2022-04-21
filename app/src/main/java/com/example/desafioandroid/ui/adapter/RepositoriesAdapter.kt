@@ -50,12 +50,26 @@ class RepositoriesAdapter : RecyclerView.Adapter<RepositoriesAdapter.Repositorie
         val repository = repositories[position]
         holder.binding.apply {
             textNameRepository.text = repository.repoName
-            textDescription.text = repository.description.limitDescription(100)
+            textDescription.text = repository.description
             textFork.text = repository.forks.toString()
             textStar.text = repository.stars.toString()
             textUserName.text = repository.owner.name
             loadImage(imageAvatar, repository.owner.avatar)
+
+
+            imageAvatar.setOnClickListener {
+                onUserClickListener?.let {
+                    it(repository)
+                }
+            }
+            textUserName.setOnClickListener {
+                onUserClickListener?.let {
+                    it(repository)
+                }
+            }
         }
+
+
 
         holder.itemView.setOnClickListener {
             onItemClickListener?.let {
@@ -67,8 +81,14 @@ class RepositoriesAdapter : RecyclerView.Adapter<RepositoriesAdapter.Repositorie
 
     private var onItemClickListener: ((RepositoriesModel) -> Unit)? = null
 
+    private var onUserClickListener: ((RepositoriesModel) -> Unit)? = null
+
     fun setOnClickListener(listener: (RepositoriesModel) -> Unit) {
         onItemClickListener = listener
+    }
+
+    fun setOnUserClickListener(listener: (RepositoriesModel) -> Unit) {
+        onUserClickListener = listener
     }
 
 }

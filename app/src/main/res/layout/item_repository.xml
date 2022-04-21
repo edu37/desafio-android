@@ -14,11 +14,14 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_name_repository"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:fontFamily="sans-serif-condensed"
+            android:maxLines="1"
             android:padding="8dp"
             android:text="@string/name_repository"
+            android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@id/text_description"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,13 +30,16 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_description"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:ellipsize="end"
             android:fontFamily="sans-serif-condensed"
+            android:maxLines="3"
             android:padding="8dp"
             android:text="@string/description"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/text_fork"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/text_name_repository" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_fork"
@@ -43,7 +49,7 @@
             android:drawableStart="@drawable/fork"
             android:fontFamily="sans-serif-black"
             android:text="@string/fork"
-            android:textColor="#DCCF59"
+            android:textColor="#F3E140"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -55,7 +61,7 @@
             android:drawableStart="@drawable/ic_star_24"
             android:fontFamily="sans-serif-black"
             android:text="@string/star"
-            android:textColor="#DCCF59"
+            android:textColor="#F3E140"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/text_fork" />
 
@@ -71,8 +77,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_user_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
+            android:layout_height="30dp"
+            android:gravity="center"
             android:text="@string/user_name"
             android:textColor="#5977E3"
             android:textSize="12sp"

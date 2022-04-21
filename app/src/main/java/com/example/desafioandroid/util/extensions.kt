@@ -9,6 +9,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 fun loadImage(imageView: CircleImageView, url: String) {
     Glide.with(imageView.context)
         .load(url)
+        .placeholder(R.drawable.perfil)
         .error(R.drawable.perfil)
         .diskCacheStrategy(DiskCacheStrategy.NONE)
         .into(imageView)

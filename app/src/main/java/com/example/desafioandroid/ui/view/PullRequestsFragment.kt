@@ -103,10 +103,17 @@ class PullRequestsFragment : Fragment() {
     }
 
     private fun clickAdapter() {
-        mAdapter.setOnClickListener { pullRequest ->
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(pullRequest.urlPull)
-            startActivity(intent)
+        mAdapter.apply {
+            setOnClickListener { pullRequest ->
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(pullRequest.urlPull)
+                startActivity(intent)
+            }
+            setOnUserClickListener { pullRequest ->
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(pullRequest.user.userUrl)
+                startActivity(intent)
+            }
         }
     }
 }

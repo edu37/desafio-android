@@ -9,6 +9,9 @@ data class UserModel(
     val name: String,
 
     @SerializedName("avatar_url")
-    val avatar: String
+    val avatar: String,
+
+    @SerializedName("html_url")
+    val userUrl: String
 
 ): Serializable
