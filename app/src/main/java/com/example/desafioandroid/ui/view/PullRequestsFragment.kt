@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.desafioandroid.R
-import com.example.desafioandroid.databinding.FragmentSecondBinding
+import com.example.desafioandroid.databinding.FragmentPullRequestsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PullRequestsFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentPullRequestsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -21,7 +21,7 @@ class PullRequestsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentPullRequestsBinding.inflate(inflater, container, false)
         return binding.root
 
     }
