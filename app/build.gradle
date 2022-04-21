@@ -52,6 +52,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
+    // Circular imageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"

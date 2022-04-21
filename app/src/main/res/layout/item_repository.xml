@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="170dp"
     android:layout_margin="8dp"
+    android:backgroundTint="@color/white"
     app:cardCornerRadius="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +43,7 @@
             android:drawableStart="@drawable/fork"
             android:fontFamily="sans-serif-black"
             android:text="@string/fork"
+            android:textColor="#DCCF59"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -53,28 +55,31 @@
             android:drawableStart="@drawable/ic_star_24"
             android:fontFamily="sans-serif-black"
             android:text="@string/star"
+            android:textColor="#DCCF59"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/text_fork" />
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_avatar"
             android:layout_width="100dp"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             app:layout_constraintBottom_toTopOf="@id/text_user_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/perfil" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:padding="2dp"
             android:id="@+id/text_user_name"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
             android:text="@string/user_name"
+            android:textColor="#5977E3"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/image_avatar"
+            app:layout_constraintTop_toBottomOf="@id/image_avatar" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

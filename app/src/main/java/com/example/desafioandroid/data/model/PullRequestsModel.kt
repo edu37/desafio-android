@@ -5,8 +5,8 @@ import java.io.Serializable
 
 data class PullRequestsModel(
 
-    @SerializedName("url")
-    val url: String,
+    @SerializedName("html_url")
+    val urlPull: String,
 
     @SerializedName("user")
     val user: UserModel,
@@ -18,6 +18,6 @@ data class PullRequestsModel(
     val date: String,
 
     @SerializedName("body")
-    val body: String
+    val body: String?
 
 ) : Serializable

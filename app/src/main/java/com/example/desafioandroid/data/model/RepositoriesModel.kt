@@ -6,7 +6,7 @@ import java.io.Serializable
 data class RepositoriesModel(
 
     @SerializedName("name")
-    val nameRepo: String,
+    val repoName: String,
 
     @SerializedName("owner")
     val owner: UserModel,

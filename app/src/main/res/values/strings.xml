@@ -14,4 +14,7 @@
     <string name="fork">fork</string>
     <string name="star">star</string>
     <string name="user_name">Nome de usuário</string>
+    <string name="pull_tittle">Título PullRequest</string>
+    <string name="body">corpo</string>
+    <string name="date">data</string>
 </resources>

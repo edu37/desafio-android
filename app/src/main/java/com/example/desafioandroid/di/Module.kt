@@ -1,11 +1,14 @@
 package com.example.desafioandroid.di
 
+import android.content.Context
 import com.example.desafioandroid.data.remote.ServiceApi
 import com.example.desafioandroid.util.Constants.BASE_URL
+import com.example.desafioandroid.util.Constants.SHARED_PREFERENCES
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -18,6 +21,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object Module {
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(
+        @ApplicationContext context:Context
+    ) = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
     @Singleton
     @Provides
