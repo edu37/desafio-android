@@ -1,8 +1,7 @@
 package com.example.desafioandroid.repository
 
 import android.content.SharedPreferences
-import com.example.desafioandroid.data.model.PullRequestsModel
-import com.example.desafioandroid.data.model.RepositoriesModelResponse
+import com.example.desafioandroid.data.model.*
 import com.example.desafioandroid.data.remote.ServiceApi
 import com.example.desafioandroid.ui.state.State
 import com.example.desafioandroid.util.Constants.REPO_NAME
@@ -14,10 +13,10 @@ class GitRepository @Inject constructor(
     private val api: ServiceApi,
     private val shared: SharedPreferences
 ) {
-    suspend fun repositories(): State<RepositoriesModelResponse> {
+    suspend fun repositories(): State<List<RepositoriesModel>> {
         val response = api.repositories()
         return if (response.isSuccessful) {
-            State.Sucess(response.body())
+            State.Sucess(response.body()?.items)
         } else {
             val message = Gson().fromJson(response.errorBody()?.charStream(), String::class.java)
             State.Error(message)

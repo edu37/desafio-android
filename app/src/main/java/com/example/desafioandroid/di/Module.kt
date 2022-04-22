@@ -1,6 +1,7 @@
 package com.example.desafioandroid.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.example.desafioandroid.data.remote.ServiceApi
 import com.example.desafioandroid.util.Constants.BASE_URL
 import com.example.desafioandroid.util.Constants.SHARED_PREFERENCES
@@ -26,7 +27,7 @@ object Module {
     @Provides
     fun provideSharedPreferences(
         @ApplicationContext context:Context
-    ) = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+    ): SharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
     @Singleton
     @Provides

@@ -56,18 +56,23 @@ class PullRequestsAdapter : RecyclerView.Adapter<PullRequestsAdapter.PullRequest
     override fun onBindViewHolder(holder: PullRequestsViewHolder, position: Int) {
         val pullRequest = pullRequests[position]
 
+        /** Atribuir os valores de cada Pull Request
+         *  para os ítens da Recycler*/
         holder.binding.apply {
             textUserName.text = pullRequest.user.name
             textBody.text = pullRequest.body.toString()
             textTituloPull.text = pullRequest.title
 
+            /** Formatação da data recebida pela API */
             val dateFormat = pullRequest.date.limitDescription(10)
             val date = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(dateFormat)
             textDate.text = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(date!!)
 
+            /** Função extension para carregar imagens */
             loadImage(imageAvatar, pullRequest.user.avatar)
 
 
+            /** Listeners para quando a imagem ou o nome do usuário for clicado*/
             textUserName.setOnClickListener {
                 onUserClickListener?.let {
                     it(pullRequest)
@@ -80,6 +85,7 @@ class PullRequestsAdapter : RecyclerView.Adapter<PullRequestsAdapter.PullRequest
             }
         }
 
+        /** Listener para quando um ítem é clicado*/
         holder.itemView.setOnClickListener {
             onClickListener?.let {
                 it(pullRequest)
@@ -87,6 +93,7 @@ class PullRequestsAdapter : RecyclerView.Adapter<PullRequestsAdapter.PullRequest
         }
     }
 
+    /** Listeners das ações enviadas pelo fragment e suas funções de acesso:*/
     private var onClickListener: ((PullRequestsModel) -> Unit)? = null
 
     private var onUserClickListener: ((PullRequestsModel) -> Unit)? = null

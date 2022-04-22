@@ -8,6 +8,7 @@ import com.example.desafioandroid.repository.GitRepository
 import com.example.desafioandroid.ui.state.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -25,6 +26,8 @@ class PullRequestsViewModel @Inject constructor(
     fun listPull() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
+                mPullRequests.value = State.Loading()
+                delay(1000)
                 mPullRequests.value = repository.pullRequests()
             } catch (t: Throwable) {
                 Log.i("PullRequestVM", t.message.toString())
