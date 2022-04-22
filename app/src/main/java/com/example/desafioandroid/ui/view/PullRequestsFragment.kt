@@ -2,7 +2,6 @@ package com.example.desafioandroid.ui.view
 
 import android.content.Intent
 import android.net.ConnectivityManager
-import android.net.Network
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,9 +14,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafioandroid.R
+import com.example.desafioandroid.data.model.PullRequestsModel
 import com.example.desafioandroid.databinding.FragmentPullRequestsBinding
 import com.example.desafioandroid.ui.adapter.PullRequestsAdapter
 import com.example.desafioandroid.ui.state.State
@@ -117,8 +116,12 @@ class PullRequestsFragment : Fragment() {
     }
 
     private fun loadList() {
+        var list: List<PullRequestsModel> = emptyList()
+        mViewModel.pullRequests.value.data?.let {
+            list = it
+        }
         if (networkCheck.hasConnection()) {
-            mViewModel.listPull()
+            mViewModel.listPull(list)
         } else {
             pullRequestNotFound(getString(R.string.internet_error))
         }

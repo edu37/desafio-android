@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.desafioandroid.R
+import com.example.desafioandroid.data.model.RepositoriesModel
 import com.example.desafioandroid.databinding.FragmentRepositoriesBinding
 import com.example.desafioandroid.ui.adapter.RepositoriesAdapter
 import com.example.desafioandroid.ui.state.State
@@ -70,9 +71,7 @@ class RepositoriesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         clickAdapter()
 
         /** Atualiza a lista de repositórios quando o usuário arrasta a tela para baixo */
-        binding.swipeRefresh.setOnRefreshListener {
-            mViewModel.repositories(emptyList())
-        }
+        refresh()
     }
 
     override fun onDestroyView() {
@@ -128,7 +127,10 @@ class RepositoriesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun loadList() {
-        val list = mAdapter.repositories
+        var list: List<RepositoriesModel> = emptyList()
+        mViewModel.repositories.value.data?.let {
+            list = it
+        }
         if (networkCheck.hasConnection()) {
             mViewModel.repositories(list)
         } else {
@@ -147,6 +149,16 @@ class RepositoriesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = (Uri.parse(repository.owner.userUrl))
             startActivity(intent)
+        }
+    }
+
+    private fun refresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            if (networkCheck.hasConnection()) {
+                mViewModel.repositories(emptyList())
+            } else {
+                loadList()
+            }
         }
     }
 

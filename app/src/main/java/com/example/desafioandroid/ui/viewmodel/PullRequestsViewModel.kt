@@ -25,14 +25,19 @@ class PullRequestsViewModel @Inject constructor(
     val pullRequests = mPullRequests.asStateFlow()
 
     /** Manda o [gitRepository] devolver uma lista com os pull requests da Api e testa se houver erro.  */
-    fun listPull() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                mPullRequests.value = State.Loading()
-                delay(1000)
-                mPullRequests.value = repository.pullRequests()
-            } catch (t: Throwable) {
-                Log.i("PullRequestVM", t.message.toString())
+    fun listPull(list: List<PullRequestsModel>) {
+        if (list.count() > 0) {
+            mPullRequests.value = State.Sucess(list)
+        } else {
+            viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    mPullRequests.value = State.Loading()
+                    delay(1000)
+                    mPullRequests.value = repository.pullRequests()
+                } catch (t: Throwable) {
+                    mPullRequests.value = State.Error(t.message.toString())
+                    Log.i("PullRequestVM", t.message.toString())
+                }
             }
         }
     }
