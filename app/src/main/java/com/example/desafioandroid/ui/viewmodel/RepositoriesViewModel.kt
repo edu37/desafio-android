@@ -35,7 +35,7 @@ class RepositoriesViewModel @Inject constructor(
                     delay(500)
                     mRepositories.value = gitRepository.repositories()
                 } catch (t: Throwable) {
-                    mRepositories.value = State.Error(t.message)
+                    mRepositories.value = State.Error(t.message.toString())
                     Log.e("RepositoriesVM", t.message.toString())
                 }
             }
@@ -48,5 +48,4 @@ class RepositoriesViewModel @Inject constructor(
             gitRepository.saveShared(userName, repoName)
         }
     }
-
 }
