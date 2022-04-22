@@ -70,7 +70,8 @@ class RepositoriesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         /** Ações a serem feitas quando um ítem da Recycler é clicado*/
         clickAdapter()
 
-        binding.swiperefresh.setOnRefreshListener {
+        /**  */
+        binding.swipeRefresh.setOnRefreshListener {
             mViewModel.repositories(emptyList())
         }
     }
@@ -83,6 +84,7 @@ class RepositoriesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     /** Função auxiliar para quando por algum motivo não for encontrado nenhum repositório,
      *  seja por não existir, por estar desconectado da Internet ou por erro interno da API */
     private fun repositoriesNotFound(message: String) {
+        binding.swipeRefresh.isRefreshing = false
         binding.progressCircular.visibility = View.INVISIBLE
         binding.textNotFound.visibility = View.VISIBLE
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
@@ -93,7 +95,7 @@ class RepositoriesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             mViewModel.test.collectLatest { state ->
                 when (state) {
                     is State.Sucess -> {
-                        binding.swiperefresh.isRefreshing = false
+                        binding.swipeRefresh.isRefreshing = false
                         binding.progressCircular.visibility = View.INVISIBLE
                         binding.recyclerRepository.visibility = View.VISIBLE
                         state.data?.let { list ->

@@ -12,6 +12,7 @@
     <string name="pull_tittle">Título PullRequest</string>
     <string name="body">corpo</string>
     <string name="date">data</string>
+    <string name="owner">eduardotercio</string>
     <string name="not_found_pull_request">Este repositório não possui pull request</string>
     <string name="not_found_repository">Nenhum repositório encontrado</string>
     <string name="internet_error">Sem conexão com a Internet</string>

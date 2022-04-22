@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.example.desafioandroid.data.remote.ServiceApi
 import com.example.desafioandroid.util.Constants.BASE_URL
 import com.example.desafioandroid.util.Constants.SHARED_PREFERENCES
-import com.google.gson.Gson
+// by Eduardo Tercio
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

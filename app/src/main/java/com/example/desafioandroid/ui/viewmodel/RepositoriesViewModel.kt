@@ -32,6 +32,7 @@ class RepositoriesViewModel @Inject constructor(
                     delay(500)
                     mTest.value = gitRepository.repositories()
                 } catch (t: Throwable) {
+                    mTest.value = State.Error(t.message)
                     Log.e("RepositoriesVM", t.message.toString())
                 }
             }
