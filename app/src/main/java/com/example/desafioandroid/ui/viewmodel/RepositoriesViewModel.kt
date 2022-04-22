@@ -19,26 +19,30 @@ class RepositoriesViewModel @Inject constructor(
     private val gitRepository: GitRepository
 ) : ViewModel() {
 
-    private val mTest = MutableStateFlow<State<List<RepositoriesModel>>>(State.Empty())
-    val test = mTest.asStateFlow()
+    /** Observa o estado dos dados recebidos pelo [gitRepository]. */
+    private val mRepositories =
+        MutableStateFlow<State<List<RepositoriesModel>>>(State.Empty())
+    val repositories = mRepositories.asStateFlow()
 
+    /** Manda o [gitRepository] devolver uma lista com os repositórios da Api e testa se houver erro.  */
     fun repositories(list: List<RepositoriesModel>) {
         if (list.count() > 0) {
-            mTest.value = State.Sucess(list)
+            mRepositories.value = State.Sucess(list)
         } else {
             viewModelScope.launch(Dispatchers.IO) {
                 try {
-                    mTest.value = State.Loading()
+                    mRepositories.value = State.Loading()
                     delay(500)
-                    mTest.value = gitRepository.repositories()
+                    mRepositories.value = gitRepository.repositories()
                 } catch (t: Throwable) {
-                    mTest.value = State.Error(t.message)
+                    mRepositories.value = State.Error(t.message)
                     Log.e("RepositoriesVM", t.message.toString())
                 }
             }
         }
     }
 
+    /** Manda o [gitRepository] salvar estes dados no SharedPreferences. */
     fun saveData(userName: String, repoName: String) {
         viewModelScope.launch {
             gitRepository.saveShared(userName, repoName)

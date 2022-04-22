@@ -50,7 +50,7 @@ class RepositoriesAdapter : RecyclerView.Adapter<RepositoriesAdapter.Repositorie
         val repository = repositories[position]
 
         /** Atribuir os valores de cada Repositório
-         *  para os ítens da Recycler*/
+         *  para os ítens da Recycler. */
         holder.binding.apply {
             textNameRepository.text = repository.repoName
             textDescription.text = repository.description
@@ -58,11 +58,11 @@ class RepositoriesAdapter : RecyclerView.Adapter<RepositoriesAdapter.Repositorie
             textStar.text = repository.stars.toString()
             textUserName.text = repository.owner.name
 
-            /** Função extension para carregar imagens */
+            /** Função extension para carregar imagens. */
             loadImage(imageAvatar, repository.owner.avatar)
 
 
-            /** Listeners para quando a imagem ou o nome do usuário for clicado*/
+            /** Listeners para quando a imagem ou o nome do usuário for clicado. */
             imageAvatar.setOnClickListener {
                 onUserClickListener?.let {
                     it(repository)
@@ -75,7 +75,7 @@ class RepositoriesAdapter : RecyclerView.Adapter<RepositoriesAdapter.Repositorie
             }
         }
 
-        /** Listener para quando um ítem é clicado*/
+        /** Listener para quando um ítem é clicado. */
         holder.itemView.setOnClickListener {
             onItemClickListener?.let {
                 it(repository)
@@ -84,7 +84,7 @@ class RepositoriesAdapter : RecyclerView.Adapter<RepositoriesAdapter.Repositorie
 
     }
 
-    /** Listeners das ações enviadas pelo fragment e suas funções de acesso:*/
+    /** Listeners das ações enviadas pelo fragment e suas funções de acesso: */
     private var onItemClickListener: ((RepositoriesModel) -> Unit)? = null
 
     private var onUserClickListener: ((RepositoriesModel) -> Unit)? = null

@@ -11,8 +11,9 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
+        /** Cuida da animação. */
         val handle = Handler(this.mainLooper)
-        handle.postDelayed({run { openActivity() }}, 5000)
+        handle.postDelayed({run { openActivity() }}, 4000)
     }
 
     private fun openActivity(){

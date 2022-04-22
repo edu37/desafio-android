@@ -19,10 +19,12 @@ class PullRequestsViewModel @Inject constructor(
     private val repository: GitRepository
 ) : ViewModel() {
 
+    /** Observa o estado dos dados recebidos pelo [gitRepository]. */
     private val mPullRequests =
         MutableStateFlow<State<List<PullRequestsModel>>>(State.Empty())
     val pullRequests = mPullRequests.asStateFlow()
 
+    /** Manda o [gitRepository] devolver uma lista com os pull requests da Api e testa se houver erro.  */
     fun listPull() {
         viewModelScope.launch(Dispatchers.IO) {
             try {

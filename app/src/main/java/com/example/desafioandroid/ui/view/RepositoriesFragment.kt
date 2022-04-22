@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +33,7 @@ class RepositoriesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private val mViewModel: RepositoriesViewModel by viewModels()
     private val mAdapter by lazy { RepositoriesAdapter() }
 
+    /** Verifica a conexão com a Internet */
     private val networkCheck by lazy {
         NetworkCheck(
             ContextCompat.getSystemService(
@@ -52,25 +52,24 @@ class RepositoriesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         _binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /** Coletores de StateFlow do ViewModel*/
+        /** Coletores de StateFlow do ViewModel */
         collector()
 
-        /** Configurações para a Recycler funcionar*/
+        /** Configurações para a Recycler funcionar */
         setupRecycler()
 
-        /** Carregar a lista de Repositórios da Api*/
+        /** Carregar a lista de Repositórios da Api */
         loadList()
 
-        /** Ações a serem feitas quando um ítem da Recycler é clicado*/
+        /** Ações a serem feitas quando um ítem da Recycler é clicado */
         clickAdapter()
 
-        /**  */
+        /** Atualiza a lista de repositórios quando o usuário arrasta a tela para baixo */
         binding.swipeRefresh.setOnRefreshListener {
             mViewModel.repositories(emptyList())
         }
@@ -92,7 +91,7 @@ class RepositoriesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private fun collector() = lifecycleScope.launch {
         repeatOnLifecycle(Lifecycle.State.STARTED) {
-            mViewModel.test.collectLatest { state ->
+            mViewModel.repositories.collectLatest { state ->
                 when (state) {
                     is State.Sucess -> {
                         binding.swipeRefresh.isRefreshing = false

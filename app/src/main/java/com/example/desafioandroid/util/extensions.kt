@@ -6,6 +6,7 @@ import com.example.desafioandroid.R
 import com.google.android.material.imageview.ShapeableImageView
 import de.hdodenhof.circleimageview.CircleImageView
 
+/** Carrega uma imagem utilizando Glide. */
 fun loadImage(imageView: CircleImageView, url: String) {
     Glide.with(imageView.context)
         .load(url)
@@ -15,6 +16,7 @@ fun loadImage(imageView: CircleImageView, url: String) {
         .into(imageView)
 }
 
+/** Função que pega uma string e a retorna com o numero de characteres que é passado. */
 fun String.limitDescription(characters: Int): String {
     if (this.length > characters) {
         val firstCharacter = 0

@@ -36,7 +36,6 @@ object Module {
         logging.level = HttpLoggingInterceptor.Level.BODY
 
         val client = OkHttpClient.Builder()
-
         client.addInterceptor(logging)
             .addInterceptor(Interceptor { chain ->
                 val request = chain.request().newBuilder()

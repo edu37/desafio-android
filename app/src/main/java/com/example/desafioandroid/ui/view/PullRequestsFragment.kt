@@ -33,6 +33,7 @@ class PullRequestsFragment : Fragment() {
     private val mViewModel: PullRequestsViewModel by viewModels()
     private val mAdapter by lazy { PullRequestsAdapter() }
 
+    /** Verifica a conexão com a Internet */
     private val networkCheck by lazy {
         NetworkCheck(
             ContextCompat.getSystemService(
@@ -51,22 +52,21 @@ class PullRequestsFragment : Fragment() {
 
         _binding = FragmentPullRequestsBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /** Coletores de StateFlow do ViewModel*/
+        /** Coletores de StateFlow do ViewModel */
         collector()
 
-        /** Configurações para a Recycler funcionar*/
+        /** Configurações para a Recycler funcionar */
         setupRecycler()
 
-        /** Carregar a lista de PullRequests da Api*/
+        /** Carregar a lista de PullRequests da Api */
         loadList()
 
-        /** Ações a serem feitas quando um ítem da Recycler é clicado*/
+        /** Ações a serem feitas quando um ítem da Recycler é clicado */
         clickAdapter()
     }
 

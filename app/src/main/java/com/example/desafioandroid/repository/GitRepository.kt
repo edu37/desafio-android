@@ -13,6 +13,14 @@ class GitRepository @Inject constructor(
     private val api: ServiceApi,
     private val shared: SharedPreferences
 ) {
+
+    /** Salva no SharedPreferences o login do usuário e o nome do repositório em questão, que está sendo clicado para poder utilizar posteriormente para pegar os pulls requests referentes a este repositório deste usuário.*/
+    fun saveShared(userName: String, repoName: String) {
+        shared.edit().putString(USER_NAME, userName).apply()
+        shared.edit().putString(REPO_NAME, repoName).apply()
+    }
+
+    /** Recebe a resposta da Api na busca pelo objeto que contém a lista de repositórios. */
     suspend fun repositories(): State<List<RepositoriesModel>> {
         val response = api.repositories()
         return if (response.isSuccessful) {
@@ -23,11 +31,7 @@ class GitRepository @Inject constructor(
         }
     }
 
-    fun saveShared(userName: String, repoName: String) {
-        shared.edit().putString(USER_NAME, userName).apply()
-        shared.edit().putString(REPO_NAME, repoName).apply()
-    }
-
+    /** Recebe a resposta da Api na busca pela lista de pull requests. */
     suspend fun pullRequests(): State<List<PullRequestsModel>> {
         val userName = shared.getString(USER_NAME, "") ?: ""
         val repoName = shared.getString(REPO_NAME, "") ?: ""

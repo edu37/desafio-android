@@ -6,6 +6,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.os.Build
 
+/** Classe criada para verificar se o celular está conectado com a internet */
 class NetworkCheck(
     private val connectivityManager: ConnectivityManager?
 ) {
